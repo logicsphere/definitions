@@ -1,0 +1,55 @@
+syntax = "proto3";
+package com.inowhite.logicsphere.core.service;
+
+import "google/protobuf/empty.proto";
+
+message SpaceRegistrationRequest {
+  string space_name = 1;
+  string space_initials = 2;
+}
+
+message SpaceDetail {
+  int64 space_id = 1;
+  string space_name = 2;
+  string space_initials = 3;
+  string created_at = 4;
+  string last_update = 5;
+}
+
+message SpaceRegistrationResponse {
+  bool success = 1;
+  string reason = 2;
+  SpaceDetail space = 3;
+}
+
+message SpacePaginateRequest {
+  int32 page = 1;
+  int32 size = 2;
+}
+
+message SpaceCountResponse {
+  int64 count = 1;
+}
+
+message SpaceUniqueResponse {
+  bool found = 1;
+  SpaceDetail space = 2;
+}
+
+message SpaceQueryId {
+  int64 id = 1;
+}
+
+message SpaceQueryInitials {
+  string initials = 1;
+}
+
+service SpaceService {
+  rpc Create(SpaceRegistrationRequest) returns (SpaceRegistrationResponse);
+  rpc Paginate(SpacePaginateRequest) returns (stream SpaceDetail);
+  rpc Count(google.protobuf.Empty) returns (SpaceCountResponse);
+  rpc FindById(SpaceQueryId) returns (SpaceUniqueResponse);
+  rpc FindByInitials(SpaceQueryInitials) returns (SpaceUniqueResponse);
+  rpc Update(SpaceDetail) returns (SpaceRegistrationResponse);
+  rpc Delete(SpaceDetail) returns (SpaceRegistrationResponse);
+}

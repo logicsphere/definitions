@@ -1,0 +1,29 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+package com.inowhite.logicsphere.core.service;
+
+import "space.proto";
+
+message ModuleRegisterRequest {
+  string code = 1;
+  string name = 2;
+  string description = 3;
+  string vendor = 4;
+  string version = 5;
+  SpaceDetail space = 6;
+}
+
+message ModuleWriteResponse {
+  bool success = 1;
+  string reason = 2;
+}
+
+message ModuleDeregisterRequest {
+  string code = 1;
+}
+
+service ModuleService {
+  rpc Register(ModuleRegisterRequest) returns (ModuleWriteResponse);
+  rpc Deregister(ModuleDeregisterRequest) returns (ModuleWriteResponse);
+}
