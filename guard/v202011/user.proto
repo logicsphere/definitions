@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package logicsphere.guard;
+
+message UserRegistrationRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string email_address = 3;
+    string username = 4;
+    string phone_number = 5;
+    string role = 6;
+}
+
+message UserRegistrationResponse {
+    bool success = 1;
+    int64 id = 2;
+    string reason = 3;
+}
+
+service UserService {
+    rpc Create(UserRegistrationRequest) returns (UserRegistrationResponse) {};
+}
