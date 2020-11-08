@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package logicsphere.guard;
+package com.inowhite.logicsphere.grpc.guard;
 
 message UserRegistrationRequest {
     string first_name = 1;
